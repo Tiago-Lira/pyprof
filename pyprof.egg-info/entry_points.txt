@@ -1,0 +1,3 @@
+[console_scripts]
+pyprof = pyprof.bin.prof:cli
+
