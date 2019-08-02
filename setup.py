@@ -10,7 +10,7 @@ setup(
     license='MIT',
     long_description=open('README.md').read(),
     install_requires=[
-        'line-profiler==2.1.2',
+        'line-profiler',
     ],
     entry_points={
         "console_scripts": [
