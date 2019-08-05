@@ -71,5 +71,27 @@ class Profile:
             self._registry[name].append(fn)
         return fn
 
+    def timing(self, fn=None, *args, **kwargs):
+        if hasattr(fn, '__call__'):
+            return self._timing(fn)
+
+        def _inner(fn):
+            return self._timing(fn, *args, **kwargs)
+        return _inner
+
+    def _timing(self, fn, num=10, verbose=0, unit='ms'):
+
+        @functools.wraps(fn)
+        def _inner(*args, **kwargs):
+            from timerit import Timerit
+            timer = Timerit(num=num, verbose=verbose, unit=unit)
+            for t1 in timer:
+                with t1:
+                    result = fn(*args, **kwargs)
+            print(t1.report())
+            return result
+
+        return _inner
+
 
 profile = Profile()
