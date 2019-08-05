@@ -88,7 +88,7 @@ class Profile:
             for t1 in timer:
                 with t1:
                     result = fn(*args, **kwargs)
-            print(t1.report())
+            print(timer.report())
             return result
 
         return _inner
